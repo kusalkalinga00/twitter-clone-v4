@@ -14,7 +14,7 @@ import {
 
 export default function Sidebar() {
   return (
-    <div className="hidden sm:flex flex-col p-2 xl:items-start fixed h-full">
+    <div className="hidden sm:flex flex-col p-2 xl:items-start fixed h-full xl:ml-24">
       {/**twitter logo */}
       <div className="hoverEffect p-0 hover:bg-blue-100 xl:px-1">
         <Image
@@ -45,7 +45,7 @@ export default function Sidebar() {
 
       <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
         <img
-          src="https://yt3.ggpht.com/ytc/AMLnZu8IFJmMRkzYny2lGghAO9bIyiY8N4SUcxYf3Sec=s900-c-k-c0x00ffffff-no-rj"
+          src="https://pbs.twimg.com/profile_images/1439153058487967748/sl9ZO4D2_400x400.jpg"
           className="h-10 w-10 rounded-full xl:mr-2"
         />
         <div className="leading-5  hidden xl:inline">

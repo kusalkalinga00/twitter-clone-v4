@@ -4,7 +4,7 @@ export default function Input() {
   return (
     <div className="flex border-b border-gray-200 p-3 space-x-3 ">
       <img
-        src="https://yt3.ggpht.com/ytc/AMLnZu8IFJmMRkzYny2lGghAO9bIyiY8N4SUcxYf3Sec=s900-c-k-c0x00ffffff-no-rj"
+        src="https://pbs.twimg.com/profile_images/1439153058487967748/sl9ZO4D2_400x400.jpg"
         alt="user-image"
         className="h-11 w-11 rounded-full cursor-pointer hover:brightness-95"
       />
