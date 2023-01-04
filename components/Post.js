@@ -14,10 +14,11 @@ import {
   setDoc,
 } from "firebase/firestore";
 import Moment from "react-moment";
-import { db } from "../firebase";
+import { db, storage } from "../firebase";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
+import { deleteObject, ref } from "firebase/storage";
 
 export default function Post({ post }) {
   const { data: session } = useSession();
@@ -46,8 +47,15 @@ export default function Post({ post }) {
           username: session.user.username,
         });
       }
-    }else{
-      signIn()
+    } else {
+      signIn();
+    }
+  }
+
+  async function deletePost() {
+    if (window.confirm("Are you sure you want to delete this post ?")) {
+      deleteDoc(doc(db, "posts", post.id));
+      deleteObject(ref(storage, `posts/${post.id}/image`));
     }
   }
 
@@ -90,7 +98,13 @@ export default function Post({ post }) {
         {/** icons */}
         <div className="flex justify-between text-gray-500 p-2">
           <ChatIcon className="h-9  w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
-          <TrashIcon className="h-9 w-9 hoverEffect p-2 hover:text-red-500 hover:bg-red-100" />
+          {session?.user.uid === post?.data().id && (
+            <TrashIcon
+              onClick={deletePost}
+              className="h-9 w-9 hoverEffect p-2 hover:text-red-500 hover:bg-red-100"
+            />
+          )}
+
           <div className="flex items-center">
             {hasliked ? (
               <HeartIconFilled
