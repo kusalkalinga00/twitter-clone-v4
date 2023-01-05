@@ -20,13 +20,14 @@ import { useEffect, useState } from "react";
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import { deleteObject, ref } from "firebase/storage";
 import { useRecoilState } from "recoil";
-import { modalState } from "../atom/modalAtom";
+import { modalState, postIdState } from "../atom/modalAtom";
 
 export default function Post({ post }) {
   const { data: session } = useSession();
   const [likes, setLikes] = useState([]);
   const [hasliked, sethasLiked] = useState(false);
   const [open, setOpen] = useRecoilState(modalState);
+  const [postId, setPostId] = useRecoilState(postIdState);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -103,7 +104,14 @@ export default function Post({ post }) {
         {/** icons */}
         <div className="flex justify-between text-gray-500 p-2">
           <ChatIcon
-            onClick={() => setOpen(!open)}
+            onClick={() => {
+              if (!session) {
+                signIn();
+              } else {
+                setPostId(post.id);
+                setOpen(!open);
+              }
+            }}
             className="h-9  w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"
           />
           {session?.user.uid === post?.data().id && (
